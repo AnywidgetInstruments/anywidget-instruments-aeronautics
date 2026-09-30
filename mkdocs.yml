@@ -28,6 +28,7 @@ nav:
   - Standards and references: standards.md
   - Specification: specification.md
   - Requirements status: requirements-status.md
+  - The anywidget instruments family: https://anywidgetinstruments.github.io/
 markdown_extensions:
   - tables
   - admonition

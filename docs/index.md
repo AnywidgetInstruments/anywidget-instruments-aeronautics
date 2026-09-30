@@ -5,6 +5,10 @@ anywidget-instruments family: airspeed indicator, attitude indicator, altimeter,
 coordinator, heading indicator, vertical speed indicator, and later a horizontal
 situation indicator, a primary flight display and engine gauges.
 
+Part of the [anywidget instruments family](https://anywidgetinstruments.github.io/):
+the core, the industrial, automotive and aeronautics widget libraries, their
+hosts (Python, Julia, Grafana) and their live demos.
+
 !!! danger "Not for navigation"
     These widgets are for visualization, teaching and simulation. They are not
     certified avionics and must never be used to fly an aircraft. Read the
