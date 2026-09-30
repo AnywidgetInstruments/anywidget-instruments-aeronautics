@@ -2,3 +2,11 @@ site/
 .venv/
 node_modules/
 __pycache__/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+dist/
+# generated: the trait contract and the built front end
+js/src/generated/
+src/anywidget_instruments_aeronautics/static/

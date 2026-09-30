@@ -8,9 +8,9 @@
 | Author | Sébastien Celles |
 | Document type | Software requirements specification |
 | Notation | EARS (Easy Approach to Requirements Syntax); priorities MoSCoW: **M** must, **S** should, **C** could, **W** won't (this time) |
-| Version | 0.1 |
+| Version | 0.2 |
 | Date | 2026-09-30 |
-| Status | Draft, design stage |
+| Status | Draft, foundations and basic six in implementation |
 
 ## 1. Introduction
 
@@ -75,13 +75,19 @@ to be operated or relied upon in flight, and any claim of certification.
 | FLT-008 | S | The library shall provide a `PrimaryFlightDisplay` arranging an airspeed tape, an attitude indicator, an altitude tape, a vertical speed scale and a heading scale. |
 | FLT-009 | S | The library shall provide an `InstrumentPanel` placing the basic six in the basic T arrangement. |
 | FLT-010 | C | The library shall provide engine gauges: engine speed, manifold pressure, fuel quantity and fuel flow, exhaust gas and cylinder head temperatures. |
+| FLT-011 | M | The `AirspeedIndicator` shall draw its arcs from the traits `white_arc`, `green_arc` and `yellow_arc` (each `[from, to]` in `input_unit`, or null for none) and a red radial line at `vne`. |
+| FLT-012 | M | The `AttitudeIndicator` shall show ±30° of pitch around the horizon line, with a pitch ladder marked every 5° and labelled every 10°, and a bank scale marked at 10°, 20°, 30°, 45° and 60° on each side; `pitch` shall be read within ±90° and `roll` within ±180°. |
+| FLT-013 | M | The `Altimeter` shall show the hundreds on the long pointer (one turn per 1000 units) and the thousands on the short pointer (one turn per 10 000 units), with the altitude as a figure, and the pressure setting in its window. |
+| FLT-014 | M | The `TurnCoordinator` shall bank its aircraft symbol by 20° at the standard rate of 3°/s, with marks at the standard rate on each side, limited to 1.5 times the standard rate, and move its ball with `slip` (−1 full left, +1 full right). |
+| FLT-015 | M | The `HeadingIndicator` shall rotate its card so that `heading` (read modulo 360) is under the lubber line, and draw the heading bug at `bug` when it is set. |
+| FLT-016 | M | The `VerticalSpeedIndicator` shall show zero at 9 o'clock, climbs above and descents below, over 170° each way, the first half of the range (`max`) over 60% of that arc. |
 
 ## 5. Units (UNIT)
 
 | ID | Pri | Requirement |
 |---|---|---|
 | UNIT-001 | M | The library shall accept speeds in knots, kilometres per hour or miles per hour; altitudes in feet or metres; vertical speeds in feet per minute or metres per second; pressure settings in hectopascals or inches of mercury. |
-| UNIT-002 | M | The widget shall convert the value from its input unit to its displayed unit in the front end, with exact conversion factors. |
+| UNIT-002 | M | The widget shall convert the value from its input unit to its displayed unit in the front end, with exact conversion factors: 1 kt = 1852/3600 m/s, 1 mph = 1609.344/3600 m/s, 1 ft = 0.3048 m, 1 ft/min = 0.00508 m/s, 1 inHg = 3386.389 Pa. |
 | UNIT-003 | M | If a host sets a unit the widget does not accept for its quantity, then the widget shall show an invalid state rather than a figure. |
 
 ## 6. Robustness (ROB)
@@ -111,13 +117,13 @@ to be operated or relied upon in flight, and any claim of certification.
 
 ## 9. Open questions
 
-1. The pitch and bank ranges shown by the `AttitudeIndicator`, and whether it shows
-   unusual attitudes with chevrons.
-2. The shape of the `VerticalSpeedIndicator` scale near zero.
-3. Whether the `PrimaryFlightDisplay` shows speed trend and altitude trend vectors.
+1. Resolved (0.2): FLT-012. Chevrons for unusual attitudes are not planned (W).
+2. Resolved (0.2): FLT-016.
+3. Speed and altitude trend vectors on the `PrimaryFlightDisplay` are not planned (W).
 
 ## Revision History
 
 | Version | Changes |
 |---|---|
 | 0.1 | First draft: general, common behaviour, flight instruments, units, robustness, accessibility, documentation and safety. |
+| 0.2 | FLT-011 .. FLT-016: the traits and drawing of the basic six; UNIT-002: the conversion factors; open questions 1 to 3 resolved. |

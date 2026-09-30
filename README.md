@@ -12,9 +12,32 @@ reuses. Everything a widget shows, unit conversion included, is computed in the
 front end from its traits, so it behaves alike from Python, Julia or any host
 that sets those traits.
 
-> **Status: design stage.** The [specification](docs/specification.md) comes
-> first; no widget is written yet. [`docs/requirements-status.md`](docs/requirements-status.md)
-> tracks what is done.
+> **Status: early implementation (0.1.0.dev0).** The basic six are written, with the
+> Python binding; the [specification](docs/specification.md) says what comes next and
+> [`docs/requirements-status.md`](docs/requirements-status.md) what is done. Not on the
+> package index yet.
+
+## Install and use
+
+From a clone, with Node.js 22 for the front end; the anywidget-instruments core is
+installed first, at the commit `package.json` pins:
+
+```bash
+npm install && npm run build
+pip install "anywidget-instruments @ git+https://github.com/AnywidgetInstruments/anywidget-instruments@<commit of package.json>"
+pip install -e .
+```
+
+```python
+import anywidget_instruments_aeronautics as aw
+
+speed = aw.AirspeedIndicator(
+    value=105, white_arc=[45, 85], green_arc=[55, 130], yellow_arc=[130, 163], vne=163
+)
+attitude = aw.AttitudeIndicator(pitch=5, roll=-15)
+altitude = aw.Altimeter(value=3450, pressure=1013)
+speed.value = 110  # a host only sets traits; the front end draws and converts
+```
 
 > **Not for navigation.** These widgets are for visualization, teaching and
 > simulation. They are not certified avionics and must never be used to fly an

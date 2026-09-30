@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-aeronautics/schema/verticalspeedindicator.schema.json",
+  "title": "VerticalSpeedIndicator",
+  "description": "Climb and descent rates (FLT-006, FLT-016).",
+  "type": "object",
+  "x-awi-class": "VerticalSpeedIndicator",
+  "allOf": [
+    {
+      "$ref": "aeronautics.schema.json"
+    }
+  ],
+  "properties": {
+    "_kind": {
+      "const": "awf-vsi",
+      "default": "awf-vsi",
+      "x-awi-writer": "host",
+      "description": "Front-end renderer identifier."
+    },
+    "size": {
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/properties/size",
+      "default": [
+        200,
+        224
+      ]
+    },
+    "label": {
+      "type": "string",
+      "default": "Vertical speed",
+      "x-awi-writer": "host",
+      "description": "Plain text, never interpreted as HTML (SEC-002)."
+    },
+    "value": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "default": null,
+      "x-awi-writer": "host",
+      "description": "Vertical speed in input_unit, climb positive; null: no value (ROB-002)."
+    },
+    "unit": {
+      "enum": [
+        "ft/min",
+        "m/s"
+      ],
+      "default": "ft/min",
+      "x-awi-writer": "host",
+      "description": "Displayed unit of the vertical speed (UNIT-001)."
+    },
+    "input_unit": {
+      "enum": [
+        "ft/min",
+        "m/s"
+      ],
+      "default": "ft/min",
+      "x-awi-writer": "host",
+      "description": "Unit in which the host gives the vertical speed and the scale (UNIT-002)."
+    },
+    "max": {
+      "type": "number",
+      "default": 2000,
+      "x-awi-writer": "host",
+      "description": "End of the scale each way, in input_unit.",
+      "exclusiveMinimum": 0
+    }
+  }
+}

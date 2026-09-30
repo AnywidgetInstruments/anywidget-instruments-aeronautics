@@ -11,11 +11,22 @@ the [anywidget-instruments](https://github.com/AnywidgetInstruments/anywidget-in
 core (base view, base class, trait contract and its generator, themes, liveness). It
 depends on the core only, never on another widget library of the family.
 
-The repository is at the **design stage**: `docs/specification.md` (EARS requirements)
-comes before any code; `docs/requirements-status.md` tracks them. The layout to come is
-that of anywidget-instruments-automotive: `js/` (TypeScript front end, one bundle, `_kind`
-prefixed `awf-`), `src/anywidget_instruments_aeronautics/` (Python binding and
-`schema/`, extending the base schema of the core by its `$id`), `tests/`, `e2e/`.
+The requirements come from `docs/specification.md` (EARS); `docs/requirements-status.md`
+tracks them. The basic six instruments are implemented; the HSI, the primary flight
+display, the instrument panel and the engine gauges are to come.
+
+## Layout
+
+| Path | Content |
+|---|---|
+| `src/anywidget_instruments_aeronautics/schema/` | Trait contract: one JSON Schema per widget, extending the base schema of the core by its `$id` |
+| `src/anywidget_instruments_aeronautics/` | Python binding: `AeronauticsWidget` (`_base.py`) and the widgets (`_widgets.py`) |
+| `src/anywidget_instruments_aeronautics/static/` | Built front end and `contract.json`: generated, never committed |
+| `js/src/core/` | `view.ts` (base view, deriving from that of the core), `state.ts` (missing, stale and invalid values), `units.ts` |
+| `js/src/widgets/` | One view per widget; `dial.ts` holds the drawing helpers of the round instruments |
+| `js/src/generated/` | `contract.ts`, generated from the schemas by `npm run gen`: never committed |
+| `js/preview/index.html` | The widgets with no kernel; `npm run images` captures them into `docs/img/widgets/` |
+| `js/test/`, `tests/` | vitest (a host with no kernel), pytest (the classes against the contract) |
 
 ## Rules
 
@@ -34,16 +45,22 @@ prefixed `awf-`), `src/anywidget_instruments_aeronautics/` (Python binding and
 ## Commands
 
 ```bash
-pip install "mkdocs>=1.6,<2" "mkdocs-material>=9.5"
-mkdocs build --strict      # documentation site, from docs/
+npm install && npm run build        # contract + bundle (the core comes from package.json)
+npm run lint && npm run typecheck && npm test
+npm run images                      # docs/img/widgets/<widget>-light.png and -dark.png
+pip install "anywidget-instruments @ git+https://github.com/AnywidgetInstruments/anywidget-instruments@<commit of package.json>"
+pip install -e ".[dev,docs]" && pytest && ruff check . && ruff format --check . && mypy src
+mkdocs build --strict               # documentation site, from docs/
 ```
+
+Take the images again whenever a widget changes, so the site never shows an older look.
 
 ## Conventions
 
 - Repository content is in English.
 - Do not name, cite or compare with third-party products or projects whose ideas
   inspired a feature; describe the feature itself.
-- Never commit generated files (`site/`, built bundles, generated contracts).
+- Never commit generated files (`site/`, `js/src/generated/`, `src/anywidget_instruments_aeronautics/static/`).
 
 ## Git
 

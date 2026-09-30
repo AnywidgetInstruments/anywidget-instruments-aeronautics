@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-aeronautics/schema/turncoordinator.schema.json",
+  "title": "TurnCoordinator",
+  "description": "Rate of turn and slip or skid (FLT-004, FLT-014).",
+  "type": "object",
+  "x-awi-class": "TurnCoordinator",
+  "allOf": [
+    {
+      "$ref": "aeronautics.schema.json"
+    }
+  ],
+  "properties": {
+    "_kind": {
+      "const": "awf-turn",
+      "default": "awf-turn",
+      "x-awi-writer": "host",
+      "description": "Front-end renderer identifier."
+    },
+    "size": {
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/properties/size",
+      "default": [
+        200,
+        224
+      ]
+    },
+    "label": {
+      "type": "string",
+      "default": "Turn",
+      "x-awi-writer": "host",
+      "description": "Plain text, never interpreted as HTML (SEC-002)."
+    },
+    "rate": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "default": null,
+      "x-awi-writer": "host",
+      "description": "Rate of turn in degrees per second, right positive; null: no value (ROB-002)."
+    },
+    "slip": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "default": null,
+      "x-awi-writer": "host",
+      "description": "Ball deflection from −1 (full left) to +1 (full right); null: the ball is not shown.",
+      "minimum": -1,
+      "maximum": 1
+    }
+  }
+}

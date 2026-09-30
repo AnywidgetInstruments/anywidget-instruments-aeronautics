@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-aeronautics/schema/attitudeindicator.schema.json",
+  "title": "AttitudeIndicator",
+  "description": "Pitch and roll: the horizon and the pitch ladder move around a fixed aircraft symbol (FLT-002, FLT-012).",
+  "type": "object",
+  "x-awi-class": "AttitudeIndicator",
+  "allOf": [
+    {
+      "$ref": "aeronautics.schema.json"
+    }
+  ],
+  "properties": {
+    "_kind": {
+      "const": "awf-attitude",
+      "default": "awf-attitude",
+      "x-awi-writer": "host",
+      "description": "Front-end renderer identifier."
+    },
+    "size": {
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/properties/size",
+      "default": [
+        200,
+        224
+      ]
+    },
+    "label": {
+      "type": "string",
+      "default": "Attitude",
+      "x-awi-writer": "host",
+      "description": "Plain text, never interpreted as HTML (SEC-002)."
+    },
+    "pitch": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "default": null,
+      "x-awi-writer": "host",
+      "description": "Pitch in degrees, nose up positive, read within ±90; null: no value (ROB-002).",
+      "minimum": -90,
+      "maximum": 90
+    },
+    "roll": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "default": null,
+      "x-awi-writer": "host",
+      "description": "Roll in degrees, right wing down positive, read within ±180; null: no value.",
+      "minimum": -180,
+      "maximum": 180
+    }
+  }
+}

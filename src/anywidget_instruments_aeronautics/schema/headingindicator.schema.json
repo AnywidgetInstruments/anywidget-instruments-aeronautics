@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-aeronautics/schema/headingindicator.schema.json",
+  "title": "HeadingIndicator",
+  "description": "Heading on a rotating card, with a heading bug (FLT-005, FLT-015).",
+  "type": "object",
+  "x-awi-class": "HeadingIndicator",
+  "allOf": [
+    {
+      "$ref": "aeronautics.schema.json"
+    }
+  ],
+  "properties": {
+    "_kind": {
+      "const": "awf-heading",
+      "default": "awf-heading",
+      "x-awi-writer": "host",
+      "description": "Front-end renderer identifier."
+    },
+    "size": {
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/properties/size",
+      "default": [
+        200,
+        224
+      ]
+    },
+    "label": {
+      "type": "string",
+      "default": "Heading",
+      "x-awi-writer": "host",
+      "description": "Plain text, never interpreted as HTML (SEC-002)."
+    },
+    "value": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "default": null,
+      "x-awi-writer": "host",
+      "description": "Heading in degrees, read modulo 360; null: no value (ROB-002).",
+      "x-awi-modulo": 360
+    },
+    "bug": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "default": null,
+      "x-awi-writer": "host",
+      "description": "Heading bug in degrees; null: no bug.",
+      "x-awi-modulo": 360
+    }
+  }
+}

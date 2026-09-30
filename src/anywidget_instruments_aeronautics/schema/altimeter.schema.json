@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-aeronautics/schema/altimeter.schema.json",
+  "title": "Altimeter",
+  "description": "Altitude with hundreds and thousands pointers and the pressure setting (FLT-003, FLT-013).",
+  "type": "object",
+  "x-awi-class": "Altimeter",
+  "allOf": [
+    {
+      "$ref": "aeronautics.schema.json"
+    }
+  ],
+  "properties": {
+    "_kind": {
+      "const": "awf-altimeter",
+      "default": "awf-altimeter",
+      "x-awi-writer": "host",
+      "description": "Front-end renderer identifier."
+    },
+    "size": {
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/properties/size",
+      "default": [
+        200,
+        224
+      ]
+    },
+    "label": {
+      "type": "string",
+      "default": "Altitude",
+      "x-awi-writer": "host",
+      "description": "Plain text, never interpreted as HTML (SEC-002)."
+    },
+    "value": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "default": null,
+      "x-awi-writer": "host",
+      "description": "Altitude in input_unit; null: no value (ROB-002)."
+    },
+    "unit": {
+      "enum": [
+        "ft",
+        "m"
+      ],
+      "default": "ft",
+      "x-awi-writer": "host",
+      "description": "Displayed unit of the altitude (UNIT-001)."
+    },
+    "input_unit": {
+      "enum": [
+        "ft",
+        "m"
+      ],
+      "default": "ft",
+      "x-awi-writer": "host",
+      "description": "Unit in which the host gives the altitude and the scale (UNIT-002)."
+    },
+    "pressure": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "default": null,
+      "x-awi-writer": "host",
+      "description": "Pressure setting shown in the window, in pressure_unit; null: none shown."
+    },
+    "pressure_unit": {
+      "enum": [
+        "hPa",
+        "inHg"
+      ],
+      "default": "hPa",
+      "x-awi-writer": "host",
+      "description": "Unit of the pressure setting (UNIT-001)."
+    }
+  }
+}

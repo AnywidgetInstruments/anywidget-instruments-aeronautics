@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>anywidget-instruments-aeronautics preview</title>
+<link rel="stylesheet" href="../../src/anywidget_instruments_aeronautics/static/index.css">
+<style>
+  body { margin: 16px; font-family: system-ui, sans-serif; }
+  body.dark { background: #111827; color: #e5e7eb; }
+  #panel { display: grid; grid-template-columns: repeat(3, 220px); gap: 12px; }
+  #panel > div { display: flex; justify-content: center; }
+</style>
+</head>
+<body>
+<p>Preview of the widgets with no kernel: each one is a plain dictionary of traits.
+Not certified avionics, not for navigation.</p>
+<div id="panel"></div>
+<script type="module">
+  import widget from "../../src/anywidget_instruments_aeronautics/static/index.js";
+  const params = new URLSearchParams(location.search);
+  if (params.get("theme") === "dark") document.body.classList.add("dark");
+  const theme = params.get("theme") || "auto";
+  const WIDGETS = [
+    { _kind: "awf-airspeed", label: "Airspeed", value: 105, max: 200, white_arc: [45, 85], green_arc: [55, 130], yellow_arc: [130, 163], vne: 163 },
+    { _kind: "awf-attitude", label: "Attitude", pitch: 5, roll: -15 },
+    { _kind: "awf-altimeter", label: "Altitude", value: 3450, pressure: 1013 },
+    { _kind: "awf-turn", label: "Turn", rate: 3, slip: 0.25 },
+    { _kind: "awf-heading", label: "Heading", value: 275, bug: 300 },
+    { _kind: "awf-vsi", label: "Vertical speed", value: 500, max: 2000 },
+  ];
+  function model(traits) {
+    const handlers = {};
+    return {
+      get: (k) => traits[k],
+      set: (k, v) => { traits[k] = v; (handlers[`change:${k}`] || []).forEach((h) => h()); },
+      save_changes() {},
+      on: (ev, cb) => (handlers[ev] ||= []).push(cb),
+      off: (ev, cb) => { handlers[ev] = (handlers[ev] || []).filter((h) => h !== cb); },
+      send() {},
+    };
+  }
+  const panel = document.getElementById("panel");
+  for (const traits of WIDGETS) {
+    const el = document.createElement("div");
+    el.dataset.kind = traits._kind;
+    panel.append(el);
+    const m = model({ theme, ...traits });
+    widget.initialize({ model: m });
+    widget.render({ model: m, el });
+  }
+</script>
+</body>
+</html>

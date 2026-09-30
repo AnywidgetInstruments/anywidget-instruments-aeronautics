@@ -1,0 +1,77 @@
+/* anywidget-instruments-aeronautics styles, on top of the core styles (palettes,
+ * themes, widget frame). Every rule is scoped under .awf-root, which is also an
+ * .awi-root, and every colour is a custom property a page may override. */
+@import "anywidget-instruments/js/src/styles.css";
+
+.awf-root {
+  --awf-bezel: #1f2937;
+  --awf-dial: #111827;
+  --awf-ink: #f9fafb;
+  --awf-muted: #9ca3af;
+  --awf-pointer: #f9fafb;
+  --awf-sky: #2f6fb3;
+  --awf-ground: #7a4f2a;
+  --awf-symbol: #fbbf24;
+  --awf-arc-white: #f9fafb;
+  --awf-arc-green: #22c55e;
+  --awf-arc-yellow: #facc15;
+  --awf-vne: #ef4444;
+  --awf-bug: #22d3ee;
+}
+/* Instruments keep a dark face whatever the theme, as in a cockpit; the night
+ * theme lowers the luminance of everything (API-004). */
+.awf-root.awf-night { filter: brightness(0.7); }
+
+.awf-root .awf-instrument { font-family: var(--awi-font, system-ui, sans-serif); }
+.awf-root .awf-bezel { fill: var(--awf-bezel); }
+.awf-root .awf-dial { fill: var(--awf-dial); }
+.awf-root .awf-tick { stroke: var(--awf-ink); stroke-width: 1.2; }
+.awf-root .awf-major { stroke-width: 2.4; }
+.awf-root .awf-label { fill: var(--awf-ink); font-size: 13px; font-weight: 600; }
+.awf-root .awf-digit { font-size: 16px; }
+.awf-root .awf-cardinal { fill: var(--awf-symbol); font-size: 15px; }
+.awf-root .awf-note, .awf-root .awf-unit { fill: var(--awf-muted); font-size: 9px; font-weight: 600; letter-spacing: 0.04em; }
+.awf-root .awf-pointer path { fill: var(--awf-pointer); }
+.awf-root .awf-hub { fill: var(--awf-bezel); stroke: var(--awf-pointer); stroke-width: 1.5; }
+/* the readout sits under the instrument, on the page: the text colour of the theme */
+.awf-root .awf-readout { fill: var(--awi-fg); font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.awf-root .awf-arc-white { fill: var(--awf-arc-white); }
+.awf-root .awf-arc-green { fill: var(--awf-arc-green); }
+.awf-root .awf-arc-yellow { fill: var(--awf-arc-yellow); }
+.awf-root .awf-vne { stroke: var(--awf-vne); stroke-width: 3.5; }
+
+/* attitude */
+.awf-root .awf-sky { fill: var(--awf-sky); }
+.awf-root .awf-ground { fill: var(--awf-ground); }
+.awf-root .awf-horizon-line { stroke: var(--awf-ink); stroke-width: 2; }
+.awf-root .awf-ladder { stroke: var(--awf-ink); stroke-width: 1.4; }
+.awf-root .awf-ladder-label { fill: var(--awf-ink); font-size: 8px; font-weight: 600; }
+.awf-root .awf-bank-scale .awf-tick { stroke-width: 2; }
+.awf-root .awf-bank-zero, .awf-root .awf-bank-pointer { fill: var(--awf-symbol); }
+.awf-root .awf-aircraft { fill: var(--awf-symbol); stroke: var(--awf-symbol); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.awf-root .awf-aircraft path { fill: none; }
+
+/* altimeter */
+.awf-root .awf-window-frame { fill: #000; stroke: var(--awf-muted); }
+.awf-root .awf-window { fill: var(--awf-ink); font-size: 11px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.awf-root .awf-thousands path { fill: var(--awf-muted); }
+
+/* turn coordinator */
+.awf-root .awf-tube { fill: none; stroke: var(--awf-muted); stroke-width: 18; stroke-linecap: round; opacity: 0.35; }
+.awf-root .awf-tube-mark { stroke: var(--awf-ink); stroke-width: 1.5; }
+.awf-root .awf-ball { fill: #000; stroke: var(--awf-ink); stroke-width: 1.5; }
+.awf-root .awf-turn-symbol path { fill: none; stroke: var(--awf-ink); stroke-width: 5; }
+.awf-root .awf-turn-symbol circle { fill: var(--awf-ink); stroke: none; }
+
+/* heading */
+.awf-root .awf-lubber { fill: var(--awf-symbol); }
+.awf-root .awf-bug { fill: var(--awf-bug); }
+
+/* states (ROB-001 .. ROB-003): no value, stale and invalid are shown in text and
+ * shape, not by colour alone (A11Y-002) */
+.awf-root .awf-unknown { opacity: 0.35; }
+.awf-root.awf-invalid .awf-readout, .awf-root.awf-missing .awf-readout { fill: var(--awi-alarm-hi, #b45309); }
+.awf-root.awf-stale .awf-instrument { opacity: 0.6; }
+@media (prefers-reduced-motion: reduce) {
+  .awf-root * { transition: none !important; }
+}

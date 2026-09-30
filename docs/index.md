@@ -10,9 +10,10 @@ situation indicator, a primary flight display and engine gauges.
     certified avionics and must never be used to fly an aircraft. Read the
     [safety notice](safety.md).
 
-The library is at the **design stage**: the [specification](specification.md) comes
-first, and the [widget catalog](widgets.md) lists the planned widgets. It will be a
-TypeScript front end first, built on the
+The basic six are written: airspeed, attitude, altimeter, turn coordinator, heading
+and vertical speed (see the [widget catalog](widgets.md)); the HSI, the primary flight
+display and the engine gauges are to come. It is a TypeScript front end first, built
+on the
 [anywidget-instruments](https://anywidgetinstruments.github.io/anywidget-instruments/)
 core, as [anywidget-instruments-industrial](https://anywidgetinstruments.github.io/anywidget-instruments-industrial/)
 and [anywidget-instruments-automotive](https://anywidgetinstruments.github.io/anywidget-instruments-automotive/)

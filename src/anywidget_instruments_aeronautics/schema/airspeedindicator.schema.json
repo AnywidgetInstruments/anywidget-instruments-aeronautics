@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anywidgetinstruments.github.io/anywidget-instruments-aeronautics/schema/airspeedindicator.schema.json",
+  "title": "AirspeedIndicator",
+  "description": "Indicated airspeed on a dial with colour arcs and a never-exceed line (FLT-001, FLT-011).",
+  "type": "object",
+  "x-awi-class": "AirspeedIndicator",
+  "allOf": [
+    {
+      "$ref": "aeronautics.schema.json"
+    }
+  ],
+  "properties": {
+    "_kind": {
+      "const": "awf-airspeed",
+      "default": "awf-airspeed",
+      "x-awi-writer": "host",
+      "description": "Front-end renderer identifier."
+    },
+    "size": {
+      "$ref": "https://anywidgetinstruments.github.io/anywidget-instruments/schema/instrument.schema.json#/properties/size",
+      "default": [
+        200,
+        224
+      ]
+    },
+    "label": {
+      "type": "string",
+      "default": "Airspeed",
+      "x-awi-writer": "host",
+      "description": "Plain text, never interpreted as HTML (SEC-002)."
+    },
+    "value": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "default": null,
+      "x-awi-writer": "host",
+      "description": "Indicated airspeed in input_unit; null: no value received yet (ROB-002)."
+    },
+    "unit": {
+      "enum": [
+        "kt",
+        "km/h",
+        "mph"
+      ],
+      "default": "kt",
+      "x-awi-writer": "host",
+      "description": "Displayed unit of the speed (UNIT-001)."
+    },
+    "input_unit": {
+      "enum": [
+        "kt",
+        "km/h",
+        "mph"
+      ],
+      "default": "kt",
+      "x-awi-writer": "host",
+      "description": "Unit in which the host gives the speed and the scale (UNIT-002)."
+    },
+    "min": {
+      "type": "number",
+      "default": 0,
+      "x-awi-writer": "host",
+      "description": "Start of the scale, in input_unit."
+    },
+    "max": {
+      "type": "number",
+      "default": 200,
+      "x-awi-writer": "host",
+      "description": "End of the scale, in input_unit."
+    },
+    "white_arc": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "prefixItems": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2,
+      "default": null,
+      "x-awi-writer": "host",
+      "description": "Flap operating (white) arc [from, to] in input_unit, or null for none (FLT-011)."
+    },
+    "green_arc": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "prefixItems": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2,
+      "default": null,
+      "x-awi-writer": "host",
+      "description": "Normal operating (green) arc [from, to] in input_unit, or null for none (FLT-011)."
+    },
+    "yellow_arc": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "prefixItems": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2,
+      "default": null,
+      "x-awi-writer": "host",
+      "description": "Caution (yellow) arc [from, to] in input_unit, or null for none (FLT-011)."
+    },
+    "vne": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "default": null,
+      "x-awi-writer": "host",
+      "description": "Never-exceed speed in input_unit, drawn as a red line; null for none."
+    }
+  }
+}
