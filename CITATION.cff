@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software in teaching material, a publication or a
+  product, please cite it as below.
+title: "anywidget-instruments-aeronautics: flight instruments for computational notebooks"
+type: software
+authors:
+  - family-names: Celles
+    given-names: Sébastien
+    orcid: "https://orcid.org/0000-0001-9987-4338"
+    affiliation: "Université de Poitiers"
+version: 0.1.0.dev0
+license: BSD-3-Clause
+repository-code: "https://github.com/AnywidgetInstruments/anywidget-instruments-aeronautics"
+url: "https://anywidgetinstruments.github.io/anywidget-instruments-aeronautics/"
+abstract: >-
+  Airspeed indicator, attitude indicator, altimeter, turn coordinator,
+  heading indicator and vertical speed indicator for Jupyter, marimo and
+  other anywidget hosts, built on the anywidget-instruments core. For
+  visualization, teaching and simulation: not certified avionics.
+keywords:
+  - flight instruments
+  - aviation
+  - widgets
+  - notebooks
+  - anywidget
+  - education
+  - simulation
