@@ -24,3 +24,4 @@ Legend: ✅ implemented and tested · 🟡 partial · ⬜ not started.
 | DOC-001 | ✅ | Safety notice on the home page, the catalog and the README |
 | DOC-002 | ✅ | [Standards and references](standards.md) |
 | DOC-003 | ✅ | `npm run images`, pictures in the [catalog](widgets.md) |
+| (demo) | ✅ | [In-browser demo](try.md): marimo WebAssembly export of `lite/marimo/flight.py` |

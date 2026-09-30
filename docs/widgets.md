@@ -11,6 +11,8 @@ rejects. The pictures are captures of the widgets themselves.
 
 ## The basic six
 
+[Try them in your browser](try.md): the basic six in the basic T, driven by sliders.
+
 | | Widget | Values | Other traits |
 |---|---|---|---|
 | ![AirspeedIndicator](img/widgets/airspeed-light.png#only-light){ width="120" }![AirspeedIndicator](img/widgets/airspeed-dark.png#only-dark){ width="120" } | `AirspeedIndicator` (FLT-001, FLT-011) | `value`, in `input_unit` | `unit`, `input_unit` (`kt`, `km/h`, `mph`), `min`, `max`, `white_arc`, `green_arc`, `yellow_arc` (`[from, to]`), `vne` |

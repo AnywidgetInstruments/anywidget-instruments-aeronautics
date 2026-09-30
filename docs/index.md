@@ -20,7 +20,7 @@ and [anywidget-instruments-automotive](https://anywidgetinstruments.github.io/an
 are: everything a widget shows is computed in the front end from its traits, so it
 behaves alike from Python, Julia or a page with no kernel.
 
-- [Widget catalog](widgets.md)
+- [Widget catalog](widgets.md) and [a demo in your browser](try.md)
 - [Safety notice](safety.md)
 - [Standards and references](standards.md)
 - [Specification](specification.md) and [requirements status](requirements-status.md)

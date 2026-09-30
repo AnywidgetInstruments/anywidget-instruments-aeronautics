@@ -23,6 +23,7 @@ theme:
 nav:
   - Home: index.md
   - Widget catalog: widgets.md
+  - Try it in the browser: try.md
   - Safety notice: safety.md
   - Standards and references: standards.md
   - Specification: specification.md
